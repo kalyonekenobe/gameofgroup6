@@ -8,23 +8,27 @@ public class Enemy : MonoBehaviour
     private float moveSpeed;
 
     private class Point2D
-	{
+    {
         public float x;
         public float y;
 
         public Point2D(int x, int y)
-		{
+        {
             this.x = x;
             this.y = y;
-		}
-	}
+        }
+    }
 
     private static Point2D[] routePoints = new Point2D[]
-	{
-        new Point2D(-5, 0),
-        new Point2D(5, -3),
+  {
+        new Point2D(-5, 3),
+        new Point2D(4, 2),
+        new Point2D(-4, 1),
+        new Point2D(2, 0),
+        new Point2D(-2, -1),
+        new Point2D(1, -2),
+        new Point2D(-1, -3),
         new Point2D(0, -4),
-        new Point2D(2, -5)
     };
 
     private int nextPointIndex;
@@ -41,9 +45,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (isInitialized)
-		{
+        {
             if (nextPointIndex < routePoints.Length)
-			{
+            {
                 Point2D point = routePoints[nextPointIndex];
                 if (Mathf.Abs(transform.position.x - point.x) < moveSpeed / 2 && Mathf.Abs(transform.position.y - point.y) < moveSpeed / 2)
                 {
@@ -55,8 +59,10 @@ public class Enemy : MonoBehaviour
                 float stepX = dx * moveSpeed * Time.deltaTime;
                 float stepY = dy * moveSpeed * Time.deltaTime;
                 Vector3 movementDirection = new Vector3(stepX, stepY, 0);
+                Quaternion rotationTo = Quaternion.LookRotation(movementDirection, Vector3.forward);
                 transform.Translate(movementDirection, Space.World);
-			}
-		}
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTo, 360 * Time.deltaTime);
+            }
+        }
     }
 }
