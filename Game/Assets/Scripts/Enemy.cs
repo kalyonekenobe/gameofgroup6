@@ -4,32 +4,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private static Vector2[] routePoints = new Vector2[]
+    {
+        new Vector2(-5, 3),
+        new Vector2(4, 2),
+        new Vector2(-4, 1),
+        new Vector2(2, 0),
+        new Vector2(-2, -1),
+        new Vector2(1, -2),
+        new Vector2(-1, -3),
+        new Vector2(0, -4),
+    };
+
     [SerializeField]
     private float moveSpeed;
-
-    private class Point2D
-    {
-        public float x;
-        public float y;
-
-        public Point2D(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
-    private static Point2D[] routePoints = new Point2D[]
-  {
-        new Point2D(-5, 3),
-        new Point2D(4, 2),
-        new Point2D(-4, 1),
-        new Point2D(2, 0),
-        new Point2D(-2, -1),
-        new Point2D(1, -2),
-        new Point2D(-1, -3),
-        new Point2D(0, -4),
-    };
+    [SerializeField]
+    private float rotationSpeed;
 
     private int nextPointIndex;
     private bool isInitialized;
@@ -44,25 +34,33 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isInitialized)
+        if (!isInitialized || nextPointIndex >= routePoints.Length)
+		{
+            return;
+		}
+
+        Move();
+    }
+
+    private void Move()
+	{
+        Vector2 point = routePoints[nextPointIndex];
+        float distanceX = point.x - transform.position.x;
+        float distanceY = point.y - transform.position.y;
+
+        if (Mathf.Abs(distanceX) < moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < moveSpeed * Time.deltaTime)
         {
-            if (nextPointIndex < routePoints.Length)
-            {
-                Point2D point = routePoints[nextPointIndex];
-                if (Mathf.Abs(transform.position.x - point.x) < moveSpeed / 2 && Mathf.Abs(transform.position.y - point.y) < moveSpeed / 2)
-                {
-                    nextPointIndex++;
-                    Debug.Log(point);
-                }
-                float dx = (point.x - transform.position.x) / Mathf.Abs(point.x - transform.position.x) * Mathf.Min(Mathf.Abs(point.x - transform.position.x) / Mathf.Abs(point.y - transform.position.y), 1);
-                float dy = (point.y - transform.position.y) / Mathf.Abs(point.y - transform.position.y) * Mathf.Min(Mathf.Abs(point.y - transform.position.y) / Mathf.Abs(point.x - transform.position.x), 1);
-                float stepX = dx * moveSpeed * Time.deltaTime;
-                float stepY = dy * moveSpeed * Time.deltaTime;
-                Vector3 movementDirection = new Vector3(stepX, stepY, 0);
-                Quaternion rotationTo = Quaternion.LookRotation(movementDirection, Vector3.forward);
-                transform.Translate(movementDirection, Space.World);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTo, 360 * Time.deltaTime);
-            }
+            nextPointIndex++;
+            return;
         }
+
+        float directionX = distanceX / Mathf.Abs(distanceX) * Mathf.Min(Mathf.Abs(distanceX) / Mathf.Abs(distanceY), 1);
+        float directionY = distanceY / Mathf.Abs(distanceY) * Mathf.Min(Mathf.Abs(distanceY) / Mathf.Abs(distanceX), 1);
+
+        Vector2 movementDirection = new Vector2(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime);
+        transform.Translate(movementDirection, Space.World);
+
+        Quaternion rotationTo = Quaternion.LookRotation(Vector3.forward, movementDirection);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTo, rotationSpeed * Time.deltaTime);
     }
 }

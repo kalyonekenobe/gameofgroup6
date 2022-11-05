@@ -6,48 +6,45 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Transform target;
     [SerializeField]
     private float speed = 1f;
+
+    private Transform target;
+    private bool isInitialized;
+
+	public void SetEnemy(Transform enemy) => target = enemy;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        isInitialized = true;
     }
-    //name can be changed
-    private void fly()
-    {
-        if (target != null)
-        {
-            if (Mathf.Abs(Vector2.Distance( transform.position,target.position)) < 0.8f)
-            {
-               Destroy(gameObject);
-            }
-            else
-            {
-               Vector2 path = target.position - transform.position;
-            transform.Translate(path.normalized * Time.deltaTime * speed);
-            }
-                
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Destroy(gameObject);
-
-    //}
 
     // Update is called once per frame
     void Update()
     {
-        fly();
+        if (!isInitialized)
+		{
+            return;
+		}
+
+        Move();
     }
-    public void setEnemy(Transform enemy)
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        Destroy(gameObject);
+    }
+
+    private void Move()
     {
-        target=enemy;
+        if (target is null)
+		{
+            Destroy(gameObject);
+            return;
+		}
+
+        Vector2 path = target.position - transform.position;
+        transform.Translate(path.normalized * Time.deltaTime * speed);
     }
 }

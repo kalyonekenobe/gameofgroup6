@@ -3,60 +3,75 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
-{// Start is called before the first frame update
-
+{
     [SerializeField]
-    private float coolDown, range;
-    private float currCoolDown=0;
+    private float coolDown;
+    [SerializeField]
+    private float range;
     [SerializeField]
     private GameObject projectile;
-    private bool canShoot()
-    {
-        if (currCoolDown<=0)
-            return true;
-        return false;
-    }
+    
+    private float currentCoolDown;
+    private bool isInitialized;
 
+    private bool CanShoot() => currentCoolDown <= 0;
+    
+    // Start is called before the first frame update
     void Start()
     {
-        
+        currentCoolDown = 0;
+        isInitialized = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canShoot())
-            findEnemy();
-        if (currCoolDown > 0)
-            currCoolDown -= Time.deltaTime;
+        if (!isInitialized)
+		{
+            return;
+		}
 
+        if (CanShoot())
+		{
+            Transform nearestEnemy = FindNearestEnemy();
+
+            if (nearestEnemy is not null)
+            {
+                Shoot(nearestEnemy);
+            }
+        }
+
+        if (currentCoolDown > 0)
+		{
+            currentCoolDown -= Time.deltaTime;
+		}
     }
-    void findEnemy()
+
+    private Transform FindNearestEnemy()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float distanceToNearestEnemy = Mathf.Infinity;
         Transform nearestEnemy = null;
-        float nearestEnemyDistance = Mathf.Infinity;
-        //can be changed
-        foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+
+        foreach (GameObject enemy in enemies)
         {
-            float currDistance =Vector2.Distance(transform.position,enemy.transform.position);
-            if(currDistance < nearestEnemyDistance&&currDistance<=range)
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            
+            if (distance < distanceToNearestEnemy && distance <= range)
             {
                 nearestEnemy = enemy.transform;
-                nearestEnemyDistance = currDistance;
+                distanceToNearestEnemy = distance;
             }
-
         }
-        if(nearestEnemy != null)
-            shoot(nearestEnemy);
+
+        return nearestEnemy;
     }
-    void shoot(Transform enemy)
+
+    private void Shoot(Transform enemy)
     {
-        currCoolDown = coolDown;
-        GameObject obj = Instantiate(projectile);
-        obj.transform.position = transform.position;
-        obj.GetComponent<Projectile>().setEnemy(enemy);
-
-        
-
+        GameObject projectileClone = Instantiate(projectile);
+        projectileClone.transform.position = transform.position;
+        projectileClone.GetComponent<Projectile>().SetEnemy(enemy);
+        currentCoolDown = coolDown;
     }
 }
