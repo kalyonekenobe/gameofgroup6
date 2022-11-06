@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolDown: 3
   range: 16
-  projectile: {fileID: 5051261363517244397}
+  projectile: {fileID: 6034671946428909783, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}
 --- !u!212 &5948627042413846126
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -161,10 +161,5 @@ PrefabInstance:
 --- !u!4 &163256845114322900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1721175946024740078, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}
-  m_PrefabInstance: {fileID: 1560173306046368570}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5051261363517244397 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6034671946428909783, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}
   m_PrefabInstance: {fileID: 1560173306046368570}
   m_PrefabAsset: {fileID: 0}
