@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b47980492188940b42072f33dead90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 9
 --- !u!58 &335148655092195945
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 374732016526732653}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e18aaaf080a9224fb5ef3f94b40ff45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGold: 500
-  goldUIText: {fileID: 7402043540718283885, guid: a09e05bd20f24e348abd3c6fd24de089, type: 3}
+  startGold: 200
 --- !u!1001 &2547587655085918018
 PrefabInstance:
   m_ObjectHideFlags: 0

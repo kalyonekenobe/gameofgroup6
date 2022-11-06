@@ -17,6 +17,11 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         isInitialized = true;
     }
 
@@ -33,7 +38,11 @@ public class Projectile : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        Destroy(gameObject);
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log($"Projectile hit the target with position {target.position}");
+            Destroy(gameObject);
+        }
     }
 
     private void Move()
@@ -43,7 +52,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             return;
 		}
-
+        Debug.Log($"Projectile Enemy {target.position}");
         Vector2 path = target.position - transform.position;
         transform.Translate(path.normalized * Time.deltaTime * speed);
     }

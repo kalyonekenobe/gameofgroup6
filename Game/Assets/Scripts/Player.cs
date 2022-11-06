@@ -7,8 +7,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private int startGold;
-    [SerializeField]
-    private TextMeshProUGUI goldUIText;
 
     private int currentGold;
 
@@ -16,20 +14,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentGold = startGold;
-        goldUIText.text = $"Gold: {currentGold}";
     }
 
-    void AddGold(int gold)
+    public void AddGold(int gold)
     {
         currentGold += gold;
     }
 
-    void RemoveGold(int gold)
+    public void RemoveGold(int gold)
     {
         currentGold -= gold;
     }
 
-    int GetGold()
+    public int GetGold()
     {
         return currentGold;
     }

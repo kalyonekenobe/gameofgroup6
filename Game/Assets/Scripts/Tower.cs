@@ -9,6 +9,8 @@ public class Tower : MonoBehaviour
     [SerializeField]
     private float range;
     [SerializeField]
+    private int cost;
+    [SerializeField]
     private GameObject projectile;
     
     private float currentCoolDown;
@@ -18,6 +20,11 @@ public class Tower : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
     {
         currentCoolDown = 0;
         isInitialized = true;
@@ -63,15 +70,21 @@ public class Tower : MonoBehaviour
                 distanceToNearestEnemy = distance;
             }
         }
-
         return nearestEnemy;
     }
 
     private void Shoot(Transform enemy)
     {
+        Debug.Log($"Tower Enemy {enemy.position}");
         GameObject projectileClone = Instantiate(projectile);
         projectileClone.transform.position = transform.position;
         projectileClone.GetComponent<Projectile>().SetEnemy(enemy);
+        projectileClone.GetComponent<Projectile>().Initialize();
         currentCoolDown = coolDown;
+    }
+
+    public int GetCost()
+    {
+        return cost;
     }
 }
