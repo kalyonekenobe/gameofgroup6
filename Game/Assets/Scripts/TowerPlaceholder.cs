@@ -20,11 +20,11 @@ public class TowerPlaceholder : MonoBehaviour
         } 
         else if (currentTower != null)
         {
-            Debug.Log("This place already has some tower");
+            //Debug.Log("This place already has some tower");
         }
         else
         {
-            Debug.Log("Not enough gold");
+            //Debug.Log("Not enough gold");
         }
     }
 

@@ -21,7 +21,9 @@ public class GoldTextUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gold!=player.GetGold())
+
+       
+        if (gold!=player.GetGold())
         {
             gold = player.GetGold();
             textMeshPro.text = $"Gold: {gold}";

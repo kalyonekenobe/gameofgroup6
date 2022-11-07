@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080662a8a3603ea43a5eaada71d7a8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 1.5
-  range: 10
+  coolDown: 0.8
+  range: 4
   cost: 100
   projectile: {fileID: 6034671946428909783, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}
 --- !u!212 &5948627042413846126
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21586864, g: 0.68714213, b: 0.7264151, a: 0.6117647}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

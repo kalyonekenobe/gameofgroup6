@@ -40,19 +40,20 @@ public class Projectile : MonoBehaviour
 	{
         if(collision.gameObject.tag == "Enemy")
         {
-            Debug.Log($"Projectile hit the target with position {target.position}");
+            collision.gameObject.GetComponent<Enemy>().Hit();
+            //Debug.Log($"Projectile hit the target with position {target.position}");
             Destroy(gameObject);
         }
     }
 
     private void Move()
     {
-        if (target is null)
+        if (target == null)
 		{
             Destroy(gameObject);
             return;
 		}
-        Debug.Log($"Projectile Enemy {target.position}");
+        //Debug.Log($"Projectile Enemy {target.position}");
         Vector2 path = target.position - transform.position;
         transform.Translate(path.normalized * Time.deltaTime * speed);
     }

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startGold: 200
+  increaser: 15
 --- !u!1001 &2547587655085918018
 PrefabInstance:
   m_ObjectHideFlags: 0

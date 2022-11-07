@@ -75,7 +75,7 @@ public class Tower : MonoBehaviour
 
     private void Shoot(Transform enemy)
     {
-        Debug.Log($"Tower Enemy {enemy.position}");
+       // Debug.Log($"Tower Enemy {enemy.position}");
         GameObject projectileClone = Instantiate(projectile);
         projectileClone.transform.position = transform.position;
         projectileClone.GetComponent<Projectile>().SetEnemy(enemy);

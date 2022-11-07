@@ -4,29 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private static Vector2[] routePoints = new Vector2[]
-    {
-        new Vector2(-5, 3),
-        new Vector2(4, 2),
-        new Vector2(-4, 1),
-        new Vector2(2, 0),
-        new Vector2(-2, -1),
-        new Vector2(1, -2),
-        new Vector2(-1, -3),
-        new Vector2(0, -4),
-    };
-
+ 
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private float rotationSpeed;
+    [SerializeField]
+    private int lifes = 4;
 
     private int nextPointIndex;
     private bool isInitialized;
+    private Vector2[] routePoints;
+
 
     // Start is called before the first frame update
     void Start()
     {
+
         nextPointIndex = 0;
         isInitialized = true;
     }
@@ -42,13 +36,57 @@ public class Enemy : MonoBehaviour
         Move();
     }
 
+    public void Hit()
+    {
+        lifes--;
+        //Debug.Log($"lifes {lifes}");
+        switch (lifes)
+        {
+
+            case 3:
+                {
+                    //renderer.color = new Color(255f, 204f, 0f, 0.7f);
+                    GetComponent<SpriteRenderer>().color = new Color32(200, 200, 0, 225);
+                    break;
+                }
+            case 2:
+                {
+                    GetComponent<SpriteRenderer>().color = new Color32(255, 153, 0, 225);
+                    //renderer.color = new Color(1f, 102f, 0f, 0.7f);
+                    break;
+                }
+            case 1:
+                {
+                    GetComponent<SpriteRenderer>().color = new Color32(204, 51, 0, 225);
+                    //renderer.color = new Color(204f, 51f, 0f, 0.7f);
+                    break;
+                }
+            case 0:
+                {
+                    Destroy(gameObject);
+                    break;
+                }
+        }
+
+    }
+
+    public void SetRoutePoints(Vector2 [] routePoints)
+    {
+        this.routePoints = (Vector2[]) routePoints.Clone();
+    }
+
     private void Move()
 	{
+        
+
         Vector2 point = routePoints[nextPointIndex];
         float distanceX = point.x - transform.position.x;
         float distanceY = point.y - transform.position.y;
 
-        if (Mathf.Abs(distanceX) < moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < moveSpeed * Time.deltaTime)
+        if ((Vector2) gameObject.transform.position == routePoints[routePoints.Length - 1])
+            Destroy(gameObject);
+
+            if (Mathf.Abs(distanceX) < moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < moveSpeed * Time.deltaTime)
         {
             nextPointIndex++;
             return;
