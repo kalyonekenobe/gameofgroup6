@@ -10,7 +10,8 @@ public class TowerPlaceholder : MonoBehaviour
     private int buildCost;
     private GameObject currentTower;
 
-    private Player player;
+    [SerializeField]
+    private PlayerData player;
 
     private void OnMouseDown()
     {
@@ -40,7 +41,7 @@ public class TowerPlaceholder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //player = ScriptableObject.CreateInstance<PlayerData>();
         buildCost = towerToBuild.GetComponent<Tower>().GetCost();
     }
 

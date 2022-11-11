@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
+  towerType: {fileID: 11400000, guid: c0ce684249998f54fb52bd929b156d6c, type: 2}
 --- !u!58 &335148655092195945
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -3,18 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
-{
-    [SerializeField]
-    private float coolDown;
-    [SerializeField]
-    private float range;
-    [SerializeField]
-    private int cost;
-    [SerializeField]
-    private GameObject projectile;
-    
+{    
     private float currentCoolDown;
     private bool isInitialized;
+
+    public TowerTypeSO towerType;
 
     private bool CanShoot() => currentCoolDown <= 0;
     
@@ -64,7 +57,7 @@ public class Tower : MonoBehaviour
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             
-            if (distance < distanceToNearestEnemy && distance <= range)
+            if (distance < distanceToNearestEnemy && distance <= towerType.range)
             {
                 nearestEnemy = enemy.transform;
                 distanceToNearestEnemy = distance;
@@ -76,15 +69,16 @@ public class Tower : MonoBehaviour
     private void Shoot(Transform enemy)
     {
        // Debug.Log($"Tower Enemy {enemy.position}");
-        GameObject projectileClone = Instantiate(projectile);
+        GameObject projectileClone = Instantiate(towerType.projectile);
         projectileClone.transform.position = transform.position;
+        projectileClone.GetComponent<Projectile>().SetPower(towerType.hit);
         projectileClone.GetComponent<Projectile>().SetEnemy(enemy);
         projectileClone.GetComponent<Projectile>().Initialize();
-        currentCoolDown = coolDown;
+        currentCoolDown = towerType.coolDown;
     }
 
     public int GetCost()
     {
-        return cost;
+        return towerType.cost;
     }
 }

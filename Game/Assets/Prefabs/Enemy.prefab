@@ -47,9 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca885411d3a2f364083edd34d8c743d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
-  rotationSpeed: 180
-  lifes: 4
+  enemyType: {fileID: 11400000, guid: 69745bfd4fc58d547a7d3a5505086664, type: 2}
 --- !u!212 &164133395840771353
 SpriteRenderer:
   m_ObjectHideFlags: 0

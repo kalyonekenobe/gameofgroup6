@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
 
     private Transform target;
     private bool isInitialized;
+    private int power = 1;
 
 	public void SetEnemy(Transform enemy) => target = enemy;
 
@@ -23,6 +24,11 @@ public class Projectile : MonoBehaviour
     public void Initialize()
     {
         isInitialized = true;
+    }
+
+    public void SetPower(int power)
+    {
+        this.power = power;
     }
 
     // Update is called once per frame
@@ -40,7 +46,7 @@ public class Projectile : MonoBehaviour
 	{
         if(collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Enemy>().Hit();
+            collision.gameObject.GetComponent<Enemy>().Hit(power);
             //Debug.Log($"Projectile hit the target with position {target.position}");
             Destroy(gameObject);
         }

@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-
     [SerializeField]
     private List<GameObject> waves;
     private int index = 0;
-    private bool needToWait = true;
     public void OnDestroyWave()
     {
         Debug.Log("OnDestroyWave");

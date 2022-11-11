@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e18aaaf080a9224fb5ef3f94b40ff45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startGold: 200
-  increaser: 15
+  playerData: {fileID: 11400000, guid: 15340d9f7d4ff9e4fb2b53dbe3767d85, type: 2}
 --- !u!1001 &2547587655085918018
 PrefabInstance:
   m_ObjectHideFlags: 0

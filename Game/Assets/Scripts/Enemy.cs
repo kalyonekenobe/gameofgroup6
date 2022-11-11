@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
- 
-    [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
-    private float rotationSpeed;
-    [SerializeField]
-    private int lifes = 4;
+    public EnemySO enemyType;
 
+    private int lives;
     private int nextPointIndex;
     private bool isInitialized;
+    //
     private Vector2[] routePoints;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        lives = enemyType.lives;
         nextPointIndex = 0;
         isInitialized = true;
     }
@@ -36,36 +32,26 @@ public class Enemy : MonoBehaviour
         Move();
     }
 
-    public void Hit()
+    public void Hit(int hit)
     {
-        lifes--;
+        lives-=hit;
+        
         //Debug.Log($"lifes {lifes}");
-        switch (lifes)
+        if(lives <= 0)
         {
-
-            case 3:
-                {
-                    //renderer.color = new Color(255f, 204f, 0f, 0.7f);
-                    GetComponent<SpriteRenderer>().color = new Color32(200, 200, 0, 225);
-                    break;
-                }
-            case 2:
-                {
-                    GetComponent<SpriteRenderer>().color = new Color32(255, 153, 0, 225);
-                    //renderer.color = new Color(1f, 102f, 0f, 0.7f);
-                    break;
-                }
-            case 1:
-                {
-                    GetComponent<SpriteRenderer>().color = new Color32(204, 51, 0, 225);
-                    //renderer.color = new Color(204f, 51f, 0f, 0.7f);
-                    break;
-                }
-            case 0:
-                {
-                    Destroy(gameObject);
-                    break;
-                }
+            Destroy(gameObject);
+        }
+        else if(lives <= enemyType.lives / 4)
+        {
+            GetComponent<SpriteRenderer>().color = new Color32(204, 51, 0, 225);
+        }
+        else if(lives <= enemyType.lives / 2)
+        {
+            GetComponent<SpriteRenderer>().color = new Color32(255, 153, 0, 225);
+        }
+        else if(lives <= 3 * enemyType.lives / 4)
+        {
+            GetComponent<SpriteRenderer>().color = new Color32(200, 200, 0, 225);
         }
 
     }
@@ -83,10 +69,10 @@ public class Enemy : MonoBehaviour
         float distanceX = point.x - transform.position.x;
         float distanceY = point.y - transform.position.y;
 
-        if ((Vector2) gameObject.transform.position == routePoints[routePoints.Length - 1])
+        if ((Vector2) gameObject.transform.position == routePoints[routePoints.Length - 2])
             Destroy(gameObject);
 
-            if (Mathf.Abs(distanceX) < moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < moveSpeed * Time.deltaTime)
+            if (Mathf.Abs(distanceX) < enemyType.moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < enemyType.moveSpeed * Time.deltaTime)
         {
             nextPointIndex++;
             return;
@@ -95,10 +81,10 @@ public class Enemy : MonoBehaviour
         float directionX = distanceX / Mathf.Abs(distanceX) * Mathf.Min(Mathf.Abs(distanceX) / Mathf.Abs(distanceY), 1);
         float directionY = distanceY / Mathf.Abs(distanceY) * Mathf.Min(Mathf.Abs(distanceY) / Mathf.Abs(distanceX), 1);
 
-        Vector2 movementDirection = new Vector2(directionX * moveSpeed * Time.deltaTime, directionY * moveSpeed * Time.deltaTime);
+        Vector2 movementDirection = new Vector2(directionX * enemyType.moveSpeed * Time.deltaTime, directionY * enemyType.moveSpeed * Time.deltaTime);
         transform.Translate(movementDirection, Space.World);
 
         Quaternion rotationTo = Quaternion.LookRotation(Vector3.forward, movementDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTo, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTo, enemyType.rotationSpeed * Time.deltaTime);
     }
 }

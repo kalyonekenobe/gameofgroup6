@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b531eed4640e294e9fc86a3a7eb3852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quantityOfEnemies: 0
-  frequency: 0
+  waveData: {fileID: 11400000, guid: 89217bed650cdc44cac55a8151ad72f4, type: 2}
   points:
   - {fileID: 0}
   - {fileID: 0}
@@ -61,4 +60,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  enemyEasy: {fileID: 0}
+  world: {fileID: 0}
+  isLastWave: 0

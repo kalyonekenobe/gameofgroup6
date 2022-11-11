@@ -4,26 +4,14 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour 
 {
-
     [SerializeField]
-    private int quantityOfEnemies;
-
-    [SerializeField]
-    private float frequency;
-
-    [SerializeField]
-    private float waitAfterWave;
-
+    private WaveSO waveData;
     [SerializeField]
     private List<GameObject> points;
-
-    [SerializeField]
-    private GameObject enemyEasy;
-
-
     public World world;
     public bool isLastWave = false;
 
+    private int quantityOfEnemies;
     private bool isReadyToSpawn = true;
     private bool needToWait = true;
 
@@ -32,6 +20,7 @@ public class Wave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        quantityOfEnemies = waveData.quantityOfEnemies;
         enemies = new List<GameObject>();
         enabled = false;
     }
@@ -48,7 +37,7 @@ public class Wave : MonoBehaviour
     public void SpawnEnemy()
     {
         quantityOfEnemies--;
-        GameObject enemyEasyClone = Instantiate(enemyEasy);
+        GameObject enemyEasyClone = Instantiate(waveData.enemyEasy);
         enemyEasyClone.transform.position = points[0].transform.position;
         enemyEasyClone.GetComponent<Enemy>().SetRoutePoints(points.ConvertAll<Vector2>(point => (Vector2)point.transform.position).ToArray());
         enemies.Add(enemyEasyClone);
@@ -68,13 +57,13 @@ public class Wave : MonoBehaviour
     {
         isReadyToSpawn = false;
         SpawnEnemy();
-        yield return new WaitForSeconds(frequency);
+        yield return new WaitForSeconds(waveData.frequency);
         isReadyToSpawn = true;
     }
 
     private IEnumerator WaitAfterWave()
     {
-        yield return new WaitForSeconds(waitAfterWave);
+        yield return new WaitForSeconds(waveData.waitAfterWave);
         needToWait = false;
     }
 

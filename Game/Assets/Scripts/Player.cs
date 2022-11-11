@@ -5,36 +5,20 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private int startGold;
-    [SerializeField]
-    private int increaser = 5;
+    public PlayerData playerData;
 
     private int currentGold;
     private bool IsAvailable = true;
+    [SerializeField]
+    private int increaser = 15;
     private float CooldownDuration = 1.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentGold = startGold;
+        currentGold = playerData.startGold;
+        playerData.currentGold = playerData.startGold;
     }
-
-    public void AddGold(int gold)
-    {
-        currentGold += gold;
-    }
-
-    public void RemoveGold(int gold)
-    {
-        currentGold -= gold;
-    }
-
-    public int GetGold()
-    {
-        return currentGold;
-    }
-
 
     void AddGoldSystem()
     {
@@ -48,7 +32,7 @@ public class Player : MonoBehaviour
     public IEnumerator StartCooldown()
     {
         IsAvailable = false;
-        AddGold(increaser);
+        playerData.AddGold(increaser);
         yield return new WaitForSeconds(CooldownDuration);
         IsAvailable = true;
     }
@@ -57,6 +41,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         AddGoldSystem();
+        currentGold = playerData.currentGold;
     }
 
 }

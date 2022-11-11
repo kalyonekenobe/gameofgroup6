@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerToBuild: {fileID: 1985021357441314417, guid: 3b43073c560ad1b44b1d1049bff95e12, type: 3}
+  player: {fileID: 11400000, guid: 15340d9f7d4ff9e4fb2b53dbe3767d85, type: 2}
 --- !u!212 &-5712087222631555381
 SpriteRenderer:
   m_ObjectHideFlags: 0
