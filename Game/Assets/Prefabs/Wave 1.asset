@@ -15,4 +15,4 @@ MonoBehaviour:
   quantityOfEnemies: 5
   frequency: 1
   waitAfterWave: 4
-  enemyEasy: {fileID: 8023342723065476094, guid: 7ed61a6cb9696fe4d93ced020baabfab, type: 3}
+  enemyEasy: {fileID: 8023342723065476094, guid: c40671c21bc548a4ab163fc345666a0c, type: 3}

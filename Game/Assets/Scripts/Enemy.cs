@@ -6,12 +6,15 @@ public class Enemy : MonoBehaviour
 {
     public EnemySO enemyType;
 
+    [SerializeField]
+    private Animator animator;
+
     private int lives;
     private int nextPointIndex;
     private bool isInitialized;
     //
     private Vector2[] routePoints;
-
+    private bool rotated;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,8 @@ public class Enemy : MonoBehaviour
         lives = enemyType.lives;
         nextPointIndex = 0;
         isInitialized = true;
+        if (animator != null)
+            animator.SetBool("IsAlive", true);
     }
 
     // Update is called once per frame
@@ -29,17 +34,31 @@ public class Enemy : MonoBehaviour
             return;
 		}
 
-        Move();
+        if (lives > 0)
+        {
+            Move();
+        }
+       
     }
+    
+    public bool IsAlive()
+    {
+        return lives > 0;
+    } 
 
     public void Hit(int hit)
     {
         lives-=hit;
-        
+
+        if (animator != null)
+            animator.SetTrigger("Hit");
+
         //Debug.Log($"lifes {lifes}");
-        if(lives <= 0)
+        if (lives <= 0)
         {
-            Destroy(gameObject);
+            if (animator != null)
+                animator.SetBool("IsAlive", false);
+                animator.SetTrigger("Die");
         }
         else if(lives <= enemyType.lives / 4)
         {
@@ -62,17 +81,16 @@ public class Enemy : MonoBehaviour
     }
 
     private void Move()
-	{
-        
+    {
 
         Vector2 point = routePoints[nextPointIndex];
         float distanceX = point.x - transform.position.x;
         float distanceY = point.y - transform.position.y;
 
-        if ((Vector2) gameObject.transform.position == routePoints[routePoints.Length - 2])
+        if (nextPointIndex >= routePoints.Length - 1)
             Destroy(gameObject);
 
-            if (Mathf.Abs(distanceX) < enemyType.moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < enemyType.moveSpeed * Time.deltaTime)
+        if (Mathf.Abs(distanceX) < enemyType.moveSpeed * Time.deltaTime && Mathf.Abs(distanceY) < enemyType.moveSpeed * Time.deltaTime)
         {
             nextPointIndex++;
             return;
@@ -82,9 +100,13 @@ public class Enemy : MonoBehaviour
         float directionY = distanceY / Mathf.Abs(distanceY) * Mathf.Min(Mathf.Abs(distanceY) / Mathf.Abs(distanceX), 1);
 
         Vector2 movementDirection = new Vector2(directionX * enemyType.moveSpeed * Time.deltaTime, directionY * enemyType.moveSpeed * Time.deltaTime);
-        transform.Translate(movementDirection, Space.World);
 
-        Quaternion rotationTo = Quaternion.LookRotation(Vector3.forward, movementDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTo, enemyType.rotationSpeed * Time.deltaTime);
+
+        if (!rotated && distanceX < 0){ transform.Rotate(0, 180, 0); rotated = true;} 
+        else if (rotated && distanceX >= 0) {rotated = false; transform.Rotate(0, 180, 0); }
+
+
+        transform.Translate(movementDirection, Space.World);      
+        
     }
 }

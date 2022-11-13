@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3649f6855d81742828fad0166eab58, type: 3}
   m_Name: TowerTypeA
   m_EditorClassIdentifier: 
-  coolDown: 1
+  coolDown: 0.8
   range: 3
   cost: 100
   hit: 1

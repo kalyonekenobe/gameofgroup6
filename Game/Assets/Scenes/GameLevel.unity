@@ -1756,6 +1756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1156861740024378237, guid: b61655d1172b6b14e9fa03b1424c6620, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1428573320324412564, guid: b61655d1172b6b14e9fa03b1424c6620, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3841,6 +3845,10 @@ PrefabInstance:
     - target: {fileID: 1156861740024378237, guid: b61655d1172b6b14e9fa03b1424c6620, type: 3}
       propertyPath: m_Name
       value: Wave 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156861740024378237, guid: b61655d1172b6b14e9fa03b1424c6620, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1428573320324412564, guid: b61655d1172b6b14e9fa03b1424c6620, type: 3}
       propertyPath: m_RootOrder

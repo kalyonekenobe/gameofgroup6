@@ -46,9 +46,14 @@ public class Projectile : MonoBehaviour
 	{
         if(collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<Enemy>().Hit(power);
-            //Debug.Log($"Projectile hit the target with position {target.position}");
+            if (collision.gameObject.GetComponent<Enemy>().IsAlive())
+            {
+                collision.gameObject.GetComponent<Enemy>().Hit(power);             
+            }
             Destroy(gameObject);
+
+            //Debug.Log($"Projectile hit the target with position {target.position}");
+
         }
     }
 
