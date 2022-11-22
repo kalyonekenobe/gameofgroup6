@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83c6fd0b21e92d54b9dd370ce5e704c8, type: 3}
-  m_Name: Wave 2
+  m_Name: Wave 3
   m_EditorClassIdentifier: 
   quantityOfEnemies: 10
   frequency: 2
