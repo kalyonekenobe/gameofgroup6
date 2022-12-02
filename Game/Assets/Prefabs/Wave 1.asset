@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quantityOfEnemies: 5
   frequency: 1
-  waitAfterWave: 4
+  waitAfterWave: 2
   enemyEasy: {fileID: 8023342723065476094, guid: c40671c21bc548a4ab163fc345666a0c, type: 3}
