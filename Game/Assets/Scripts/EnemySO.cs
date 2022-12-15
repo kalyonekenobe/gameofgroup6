@@ -9,5 +9,5 @@ public class EnemySO : ScriptableObject
     public float rotationSpeed;
     public int lives;
     public int coinsForEnemy;
-
+    public int damage;
 }

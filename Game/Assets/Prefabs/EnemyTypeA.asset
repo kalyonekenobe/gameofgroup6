@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7643b5eb0aef8374d8c8f90cfa7d40d5, type: 3}
   m_Name: EnemyTypeA
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 22
   rotationSpeed: 360
   lives: 5
   coinsForEnemy: 50
+  damage: 35

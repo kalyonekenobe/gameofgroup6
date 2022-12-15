@@ -7,6 +7,7 @@ public class World : MonoBehaviour
     [SerializeField]
     private List<GameObject> waves;
     private int index = 0;
+    private bool isInvasionOver = false;
     public void OnDestroyWave()
     {
         Debug.Log("OnDestroyWave");
@@ -33,6 +34,20 @@ public class World : MonoBehaviour
 
         if(waves.Count > 0)
             waves[0].GetComponent<Wave>().enabled = true;
+    }
+
+    public bool IsInvasionOver()
+    {
+        return isInvasionOver;
+    }
+
+    public void Update()
+    {
+        Wave wave = waves[index].GetComponent<Wave>();
+        if (wave.isLastWave && wave.IsEnemiesDestroyed())
+        {
+            isInvasionOver = true;
+        }
     }
 
 }

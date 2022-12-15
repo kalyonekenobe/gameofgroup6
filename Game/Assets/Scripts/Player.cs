@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public PlayerData playerData;
 
     private int currentGold;
+    private int currentHealth;
     private bool IsAvailable = true;
     [SerializeField]
     private int increaser = 15;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     {
         currentGold = playerData.startGold;
         playerData.currentGold = playerData.startGold;
+        currentHealth = playerData.startHealth;
+        playerData.currentHealth = playerData.startHealth;
     }
 
     void AddGoldSystem()
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour
     {
         AddGoldSystem();
         currentGold = playerData.currentGold;
+        currentHealth = playerData.currentHealth;
     }
 
 }

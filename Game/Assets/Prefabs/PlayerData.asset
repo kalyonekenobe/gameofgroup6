@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   startGold: 100
-  currentGold: 90
+  currentGold: 100
+  startHealth: 100
+  currentHealth: 100

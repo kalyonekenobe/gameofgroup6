@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c6fd0b21e92d54b9dd370ce5e704c8, type: 3}
   m_Name: Wave 2
   m_EditorClassIdentifier: 
-  quantityOfEnemies: 6
+  quantityOfEnemies: 1
   frequency: 1
   waitAfterWave: 2
   enemyEasy: {fileID: 6445807839845217781, guid: 43be8c702b95f5a46a31c52b10c1ba2f, type: 3}

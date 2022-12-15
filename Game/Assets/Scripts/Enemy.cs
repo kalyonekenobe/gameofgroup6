@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
+    private PlayerData player;
 
     private int lives;
     private int nextPointIndex;
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<Player>().playerData;
         lives = enemyType.lives;
         nextPointIndex = 0;
         isInitialized = true;
@@ -89,8 +91,12 @@ public class Enemy : MonoBehaviour
         float absDistanceX = Mathf.Abs(distanceX);
         float absDistanceY = Mathf.Abs(distanceY);
 
-        if (nextPointIndex >= routePoints.Length - 1)
+        if (nextPointIndex >= routePoints.Length - 1) {
             Destroy(gameObject);
+            player.RemoveHealth(enemyType.damage);
+            Debug.Log("Enemy esacaped");
+        }
+            
 
         if (absDistanceX < enemyType.moveSpeed * Time.deltaTime && absDistanceY < enemyType.moveSpeed * Time.deltaTime)
         {

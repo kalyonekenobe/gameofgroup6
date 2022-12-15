@@ -43,14 +43,14 @@ public class Wave : MonoBehaviour
         enemies.Add(enemyEasyClone);
     }
 
-    private bool IsEnemiesDestroyed()
+    public bool IsEnemiesDestroyed()
     {
         bool res = true;
         for (int i = 0; i < enemies.Count; i++)
         {
             res = res && (enemies[i] == null);
         }
-        return res;
+        return res && quantityOfEnemies == 0;
     }
 
     private IEnumerator StartSpawing()
