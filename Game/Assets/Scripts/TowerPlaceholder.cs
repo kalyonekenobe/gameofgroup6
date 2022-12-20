@@ -12,10 +12,13 @@ public class TowerPlaceholder : MonoBehaviour
 
     [SerializeField]
     private PlayerData player;
+    [SerializeField]
+    private GameObject towerManager;
 
     private void OnMouseDown()
     {
-        if(player.GetGold()>= buildCost && currentTower == null)
+        buildCost = towerManager.GetComponent<TowerManager>().CurrentTower.GetComponent<Tower>().GetCost();
+        if (player.GetGold()>= buildCost && currentTower == null)
         {
             BuildTower();
         } 
@@ -32,18 +35,16 @@ public class TowerPlaceholder : MonoBehaviour
     private void BuildTower()
     {
         player.RemoveGold(buildCost);
-        currentTower = Instantiate(towerToBuild);
+        currentTower = Instantiate(towerManager.GetComponent<TowerManager>().CurrentTower);
         currentTower.transform.position = transform.position;
         currentTower.transform.parent = transform;
+        currentTower.transform.position += new Vector3(-0.05f, 0.5f, 0);//збільшив розміри і розташування башт,можна змінити
+        currentTower.transform.localScale += new Vector3(0.7f, 0.6f, 0);
         currentTower.GetComponent<Tower>().Initialize();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //player = ScriptableObject.CreateInstance<PlayerData>();
-        buildCost = towerToBuild.GetComponent<Tower>().GetCost();
-    }
+
+    
 
     // Update is called once per frame
     void Update()

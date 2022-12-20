@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7643b5eb0aef8374d8c8f90cfa7d40d5, type: 3}
-  m_Name: EnemyTypeA
+  m_Script: {fileID: 11500000, guid: 0d3649f6855d81742828fad0166eab58, type: 3}
+  m_Name: Tower Type B
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  rotationSpeed: 360
-  lives: 5
-  coinsForEnemy: 50
-  damage: 35
+  coolDown: 2.5
+  range: 3
+  cost: 50
+  hit: 1
+  projectile: {fileID: 6034671946428909783, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}

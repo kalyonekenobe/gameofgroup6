@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080662a8a3603ea43a5eaada71d7a8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bow: {fileID: 1178349418308352045, guid: 7cf402efef4e45c4ca3beb61b69b973c, type: 3}
   towerType: {fileID: 11400000, guid: c0ce684249998f54fb52bd929b156d6c, type: 2}
-  projectile: {fileID: 6034671946428909783, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}
 --- !u!212 &5948627042413846126
 SpriteRenderer:
   m_ObjectHideFlags: 0

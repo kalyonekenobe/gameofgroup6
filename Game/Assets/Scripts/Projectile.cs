@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Projectile : MonoBehaviour
 {
@@ -12,18 +13,17 @@ public class Projectile : MonoBehaviour
     private Transform target;
     private bool isInitialized;
     private int power = 1;
+    [SerializeField]
+    private Animator animator;
 
-	public void SetEnemy(Transform enemy) => target = enemy;
+    public void SetEnemy(Transform enemy) => target = enemy;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Initialize();
-    }
+  
 
     public void Initialize()
     {
         isInitialized = true;
+
     }
 
     public void SetPower(int power)
@@ -35,24 +35,25 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         if (!isInitialized)
-		{
+        {
             return;
-		}
+        }
 
         Move();
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-        if(collision.gameObject.tag == "Enemy")
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
         {
             if (collision.gameObject.GetComponent<Enemy>().IsAlive())
             {
-                collision.gameObject.GetComponent<Enemy>().Hit(power);             
+                collision.gameObject.GetComponent<Enemy>().Hit(power);
+
             }
             Destroy(gameObject);
 
-            //Debug.Log($"Projectile hit the target with position {target.position}");
+
 
         }
     }
@@ -60,12 +61,17 @@ public class Projectile : MonoBehaviour
     private void Move()
     {
         if (target == null)
-		{
+        {
             Destroy(gameObject);
             return;
-		}
-        //Debug.Log($"Projectile Enemy {target.position}");
-        Vector2 path = target.position - transform.position;
-        transform.Translate(path.normalized * Time.deltaTime * speed);
+        }
+
+        // var dir = target.position - transform.position;
+        //var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(0, 0, -angle);
+
+        transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed);
+
     }
 }
+
