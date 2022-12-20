@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,6 +8,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Animator animator;
     private PlayerData player;
+    [SerializeField]
+    private Slider slider;
+    [SerializeField]
+    private GameObject healthCanvas;
 
     private int lives;
     private int nextPointIndex;
@@ -22,6 +25,8 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Player>().playerData;
         lives = enemyType.lives;
+        slider.maxValue = lives;
+        slider.value = lives;
         nextPointIndex = 0;
         isInitialized = true;
         if (animator != null)
@@ -32,25 +37,31 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (!isInitialized || nextPointIndex >= routePoints.Length)
-		{
+        {
             return;
-		}
+        }
 
         if (lives > 0)
         {
             Move();
         }
-       
+
     }
-    
+
     public bool IsAlive()
     {
         return lives > 0;
-    } 
+    }
 
     public void Hit(int hit)
     {
-        lives-=hit;
+        if (lives == enemyType.lives)
+        {
+            healthCanvas.SetActive(true);
+        }
+        lives -= hit;
+
+        slider.value = lives;
 
         if (animator != null)
             animator.SetTrigger("Hit");
@@ -60,26 +71,26 @@ public class Enemy : MonoBehaviour
         {
             if (animator != null)
                 animator.SetBool("IsAlive", false);
-                animator.SetTrigger("Die");
+            animator.SetTrigger("Die");
         }
-        else if(lives <= enemyType.lives / 4)
+        else if (lives <= enemyType.lives / 4)
         {
             GetComponent<SpriteRenderer>().color = new Color32(204, 51, 0, 225);
         }
-        else if(lives <= enemyType.lives / 2)
+        else if (lives <= enemyType.lives / 2)
         {
             GetComponent<SpriteRenderer>().color = new Color32(255, 153, 0, 225);
         }
-        else if(lives <= 3 * enemyType.lives / 4)
+        else if (lives <= 3 * enemyType.lives / 4)
         {
             GetComponent<SpriteRenderer>().color = new Color32(200, 200, 0, 225);
         }
 
     }
 
-    public void SetRoutePoints(Vector2 [] routePoints)
+    public void SetRoutePoints(Vector2[] routePoints)
     {
-        this.routePoints = (Vector2[]) routePoints.Clone();
+        this.routePoints = (Vector2[])routePoints.Clone();
     }
 
     private void Move()
@@ -91,12 +102,13 @@ public class Enemy : MonoBehaviour
         float absDistanceX = Mathf.Abs(distanceX);
         float absDistanceY = Mathf.Abs(distanceY);
 
-        if (nextPointIndex >= routePoints.Length - 1) {
+        if (nextPointIndex >= routePoints.Length - 1)
+        {
             Destroy(gameObject);
             player.RemoveHealth(enemyType.damage);
             Debug.Log("Enemy esacaped");
         }
-            
+
 
         if (absDistanceX < enemyType.moveSpeed * Time.deltaTime && absDistanceY < enemyType.moveSpeed * Time.deltaTime)
         {
@@ -109,11 +121,11 @@ public class Enemy : MonoBehaviour
 
         Vector2 movementDirection = new Vector2(directionX * enemyType.moveSpeed * Time.deltaTime, directionY * enemyType.moveSpeed * Time.deltaTime);
 
-        if (!rotated && distanceX < 0){ transform.Rotate(0, 180, 0); rotated = true;} 
-        else if (rotated && distanceX >= 0) {rotated = false; transform.Rotate(0, 180, 0); }
+        if (!rotated && distanceX < 0) { transform.Rotate(0, 180, 0); rotated = true; }
+        else if (rotated && distanceX >= 0) { rotated = false; transform.Rotate(0, 180, 0); }
 
 
-        transform.Translate(movementDirection, Space.World);      
-        
+        transform.Translate(movementDirection, Space.World);
+
     }
 }

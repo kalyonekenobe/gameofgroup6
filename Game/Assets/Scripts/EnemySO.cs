@@ -10,4 +10,9 @@ public class EnemySO : ScriptableObject
     public int lives;
     public int coinsForEnemy;
     public int damage;
+
+    public int GetHealth()
+    {
+        return lives;
+    }
 }

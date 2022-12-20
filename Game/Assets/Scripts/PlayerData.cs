@@ -37,4 +37,9 @@ public class PlayerData : ScriptableObject
     {
         return currentHealth;
     }
+
+    public int GetMaxHealth()
+    {
+        return startHealth;
+    }
 }

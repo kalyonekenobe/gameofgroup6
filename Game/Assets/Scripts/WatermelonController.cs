@@ -15,7 +15,6 @@ public class WatermelonController : MonoBehaviour
     private GameObject waterMelon;
 
     private bool placeRain = false;
-    //private bool isAvailable;
 
     // Start is called before the first frame update
     void Start()
