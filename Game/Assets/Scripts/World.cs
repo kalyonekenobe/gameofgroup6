@@ -8,10 +8,6 @@ public class World : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> waves;
-    [SerializeField]
-    private Slider slider;
-    [SerializeField]
-    private TextMeshProUGUI textMeshPro;
 
     private int index = 0;
     private bool isInvasionOver = false;
@@ -19,8 +15,6 @@ public class World : MonoBehaviour
     {
         Debug.Log("OnDestroyWave");
         index++;
-        slider.value = index;
-        textMeshPro.text = $"{index}/{waves.Count}";
         if (waves.Count > index)
         {
             waves[index].GetComponent<Wave>().enabled = true;
@@ -29,6 +23,16 @@ public class World : MonoBehaviour
         }
 
 
+    }
+
+    public int GetIndex()
+    {
+        return index;
+    }
+
+    public int GetWavesCount()
+    {
+        return waves.Count;
     }
 
     // Start is called before the first frame update
@@ -43,10 +47,6 @@ public class World : MonoBehaviour
 
         if (waves.Count > 0)
             waves[0].GetComponent<Wave>().enabled = true;
-
-        slider.maxValue = waves.Count;
-        slider.value = 0;
-        textMeshPro.text = $"{index}/{waves.Count}";
     }
 
     public bool IsInvasionOver()
@@ -56,10 +56,14 @@ public class World : MonoBehaviour
 
     public void Update()
     {
-        Wave wave = waves[index].GetComponent<Wave>();
-        if (wave.isLastWave && wave.IsEnemiesDestroyed())
+        if (index < waves.Count)
         {
-            isInvasionOver = true;
+            Wave wave = waves[index].GetComponent<Wave>();
+            if (wave.isLastWave && wave.IsEnemiesDestroyed())
+            {
+                index++;
+                isInvasionOver = true;
+            }
         }
     }
 
