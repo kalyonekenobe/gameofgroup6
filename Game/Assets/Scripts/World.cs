@@ -11,6 +11,7 @@ public class World : MonoBehaviour
 
     private int index = 0;
     private bool isInvasionOver = false;
+    private bool isInvasionStarted = false;
     public void OnDestroyWave()
     {
         Debug.Log("OnDestroyWave");
@@ -44,9 +45,6 @@ public class World : MonoBehaviour
             if (waves[i] != null)
                 waves[i].GetComponent<Wave>().world = this;
         }
-
-        if (waves.Count > 0)
-            waves[0].GetComponent<Wave>().enabled = true;
     }
 
     public bool IsInvasionOver()
@@ -56,6 +54,13 @@ public class World : MonoBehaviour
 
     public void Update()
     {
+        if(!isInvasionStarted)
+        {
+            isInvasionStarted = true;
+            if (waves.Count > 0)
+                waves[0].GetComponent<Wave>().enabled = true;
+        }
+
         if (index < waves.Count)
         {
             Wave wave = waves[index].GetComponent<Wave>();
