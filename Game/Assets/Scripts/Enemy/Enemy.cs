@@ -66,9 +66,12 @@ public class Enemy : MonoBehaviour
         if (animator != null)
             animator.SetTrigger("Hit");
 
+        
+
         //Debug.Log($"lifes {lifes}");
         if (lives <= 0)
         {
+            GetComponent<AudioSource>().Play();
             player.AddGold(enemyType.coinsForEnemy);
             if (animator != null)
                 animator.SetBool("IsAlive", false);
@@ -76,7 +79,7 @@ public class Enemy : MonoBehaviour
         }
         else if (lives <= enemyType.lives / 4)
         {
-            GetComponent<SpriteRenderer>().color = new Color32(204, 51, 0, 225);
+            GetComponent<SpriteRenderer>().color = new Color32();
         }
         else if (lives <= enemyType.lives / 2)
         {

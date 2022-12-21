@@ -60,7 +60,14 @@ public class WatermelonController : MonoBehaviour
 
     private void PlaceMelonor()
     {
-        Vector3 objPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 placedPoint = Input.mousePosition;
+
+        placedPoint.x += 50;
+        placedPoint.y += 50;
+
+        //Debug.Log(waterMelon.GetComponent<Collider2D>().bounds.center.x);
+        //Debug.Log(waterMelon.GetComponent<Collider2D>().bounds.min.x);
+        Vector3 objPos = Camera.main.ScreenToWorldPoint(placedPoint);
         objPos.z = 1;
         Instantiate(waterMelon, objPos, Quaternion.identity);
     }

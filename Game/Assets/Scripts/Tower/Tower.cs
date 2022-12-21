@@ -74,11 +74,12 @@ public class Tower : MonoBehaviour
 
     private void Shoot(Transform enemy)//цей метод можна перенсти в клас Bow,але я не чіпав,щоб при мерджі було менше проблем
     {
+        GetComponent<AudioSource>().Play();
         // Debug.Log($"Tower Enemy {enemy.position}");
         GameObject projectileClone = Instantiate(towerType.projectile);
         projectileClone.transform.position = currBow.transform.position;
-        projectileClone.transform.parent = currBow.transform;
-        projectileClone.transform.rotation = currBow.transform.rotation;
+        //projectileClone.transform.parent = currBow.transform;
+       // projectileClone.transform.rotation = currBow.transform.rotation;
         projectileClone.GetComponent<Projectile>().SetPower(towerType.hit);
         projectileClone.GetComponent<Projectile>().SetEnemy(enemy);
         projectileClone.GetComponent<Projectile>().Initialize();

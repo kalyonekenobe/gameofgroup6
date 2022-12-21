@@ -9,12 +9,13 @@ public class World : MonoBehaviour
     [SerializeField]
     private List<GameObject> waves;
 
+
     private int index = 0;
     private bool isInvasionOver = false;
     private bool isInvasionStarted = false;
+
     public void OnDestroyWave()
     {
-        Debug.Log("OnDestroyWave");
         index++;
         if (waves.Count > index)
         {
@@ -52,10 +53,13 @@ public class World : MonoBehaviour
         return isInvasionOver;
     }
 
+
     public void Update()
     {
         if(!isInvasionStarted)
         {
+            GetComponent<AudioSource>().loop = true;
+            GetComponent<AudioSource>().Play();
             isInvasionStarted = true;
             if (waves.Count > 0)
                 waves[0].GetComponent<Wave>().enabled = true;

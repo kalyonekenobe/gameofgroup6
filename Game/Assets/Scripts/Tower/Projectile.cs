@@ -66,10 +66,11 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        // var dir = target.position - transform.position;
-        //var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0, 0, -angle);
+        var dir = target.position - transform.position;
+        var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, -angle);
 
+     
         transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed);
 
     }
