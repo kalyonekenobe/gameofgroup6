@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
 
     public void SelectLevel2()
     {
-        //SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene("Level2");
     }
 
     public void Back()
