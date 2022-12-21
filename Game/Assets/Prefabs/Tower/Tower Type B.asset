@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3649f6855d81742828fad0166eab58, type: 3}
   m_Name: Tower Type B
   m_EditorClassIdentifier: 
-  coolDown: 2.5
-  range: 3
-  cost: 50
+  coolDown: 0.7
+  range: 4
+  cost: 85
   hit: 1
   projectile: {fileID: 6034671946428909783, guid: 4ed7d869b5fd13e4f9f4ff2488489806, type: 3}

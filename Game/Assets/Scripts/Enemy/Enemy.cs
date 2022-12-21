@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log($"lifes {lifes}");
         if (lives <= 0)
         {
+            player.AddGold(enemyType.coinsForEnemy);
             if (animator != null)
                 animator.SetBool("IsAlive", false);
             animator.SetTrigger("Die");

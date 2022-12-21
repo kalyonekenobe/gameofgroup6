@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e88af3da7674447a6dbcb7f8ff8e12, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  startGold: 100
-  currentGold: 100
+  startGold: 200
+  currentGold: 200
   startHealth: 100
   currentHealth: 100

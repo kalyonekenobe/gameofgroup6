@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AddGoldSystem();
+        //AddGoldSystem();
         currentGold = playerData.currentGold;
         currentHealth = playerData.currentHealth;
     }
