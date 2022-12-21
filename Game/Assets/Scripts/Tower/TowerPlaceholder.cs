@@ -17,7 +17,7 @@ public class TowerPlaceholder : MonoBehaviour
 
     private void OnMouseDown()
     {
-        buildCost = towerManager.GetComponent<TowerManager>().CurrentTower.GetComponent<Tower>().GetCost();
+        buildCost = towerManager.GetComponent<TowerManager>().currentTower.GetComponent<Tower>().GetCost();
         if (player.GetGold()>= buildCost && currentTower == null)
         {
             BuildTower();
@@ -35,7 +35,7 @@ public class TowerPlaceholder : MonoBehaviour
     private void BuildTower()
     {
         player.RemoveGold(buildCost);
-        currentTower = Instantiate(towerManager.GetComponent<TowerManager>().CurrentTower);
+        currentTower = Instantiate(towerManager.GetComponent<TowerManager>().currentTower);
         currentTower.transform.position = transform.position;
         currentTower.transform.parent = transform;
         currentTower.transform.position += new Vector3(-0.05f, 0.5f, 0);//збільшив розміри і розташування башт,можна змінити
