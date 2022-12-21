@@ -10,9 +10,11 @@ public class TowerManager : MonoBehaviour
     public GameObject currentTower;
     private GameObject towerAButton;
     private GameObject towerBButton;
+    private World world;
 
     public void Start()
     {
+        world = GameObject.Find("World").GetComponent<World>();
         towerAButton = GameObject.Find("ButtonTowerA");
         towerBButton = GameObject.Find("ButtonTowerB");
         SelectTowerByName(currentTower.name);
@@ -21,6 +23,10 @@ public class TowerManager : MonoBehaviour
 
     public void SelectTower(GameObject newTower)
     {
+        if (world.IsInvasionOver())
+        {
+            return; // don't let select towers after game is over
+        }
         //метод що спрацьовує при натисканні на кнопку,і присвоює новий префаб для башти
         this.currentTower = newTower;
         SelectTowerByName(currentTower.name);

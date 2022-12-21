@@ -14,9 +14,19 @@ public class TowerPlaceholder : MonoBehaviour
     private PlayerData player;
     [SerializeField]
     private GameObject towerManager;
+    private World world;
+
+    private void Start()
+    {
+        world = GameObject.Find("World").GetComponent<World>();
+    }
 
     private void OnMouseDown()
     {
+        if(world.IsInvasionOver())
+        {
+            return; // don't let build towers after game is over
+        }
         buildCost = towerManager.GetComponent<TowerManager>().currentTower.GetComponent<Tower>().GetCost();
         if (player.GetGold()>= buildCost && currentTower == null)
         {
