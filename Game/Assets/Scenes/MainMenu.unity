@@ -581,7 +581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: ORC ATTACK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f74b824d2465bd4e998a2b4d12c1b7e, type: 2}
   m_sharedMaterial: {fileID: -1001362009980936812, guid: 7f74b824d2465bd4e998a2b4d12c1b7e, type: 2}
